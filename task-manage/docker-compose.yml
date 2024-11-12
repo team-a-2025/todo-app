@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      FLASK_ENV: development
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: todo_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+
+  frontend:
+    image: node:16  # Node.jsイメージを使用
+    working_dir: /app/frontend  # フロントエンドディレクトリを指定
+    volumes:
+      - ./frontend:/app/frontend  # ホストとコンテナのディレクトリをマウント
+      - /app/frontend/node_modules  # node_modulesをコンテナ内に保持
+    ports:
+      - "3000:3000"  # Reactのデフォルトポート
+    environment:
+      NODE_ENV: development
+    command: ["npm", "start"]

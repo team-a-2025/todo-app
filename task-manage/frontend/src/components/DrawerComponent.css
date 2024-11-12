@@ -1,0 +1,10 @@
+.drawer {
+    width: 250px;
+    background-color: #f5f5f5; /* グレーの背景色 */
+    height: 100%;
+  }
+  
+  .drawer-item .MuiListItemText-root {
+    color: #1976d2; /* 空色のテキスト */
+  }
+  
